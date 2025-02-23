@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".foodDetailsNutritionalDetals">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:background="@drawable/topbackground">
+
+            <ImageView
+                android:id="@+id/imageView33"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/baseline_arrow_back_24" />
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/adamina"
+                android:maxLines="2"
+                android:text="Esteria Restaurants and Food Court"
+                android:textSize="35dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/restaurantshomepagedetailbackground"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/textView59"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Nutritional"
+                android:gravity="center"
+                android:fontFamily="@font/adamina"
+                android:textSize="20dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:background="@drawable/restaurantfooddetailpagebtn"/>
+
+            <TextView
+                android:id="@+id/textView60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Incredients"
+                android:gravity="center"
+                android:fontFamily="@font/adamina"
+                android:textSize="20dp"
+                android:background="@drawable/restaurantfooddetailpagebtn"
+                android:padding="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:orientation="vertical"
+            android:background="@drawable/restaurantshomepagedetailbackground"
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/restaurantfooddetailpagebtn">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textView58"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_weight="1"
+                        android:text="Jeera rice"
+                        android:fontFamily="@font/adamina"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        />
+
+                    <ImageView
+                        android:id="@+id/imageView34"
+                        android:layout_width="10dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        android:padding="10dp"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView56"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nutritional Information"
+                    android:layout_margin="10dp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/adamina"
+                    />
+
+                <TextView
+                    android:id="@+id/textView57"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="hello"
+                    android:textSize="20dp"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"
+                    />
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+    </LinearLayout>
+</LinearLayout>

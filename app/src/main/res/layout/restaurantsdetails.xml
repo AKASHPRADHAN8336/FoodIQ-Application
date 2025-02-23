@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Horizontal RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal" />
+
+            <!-- Restaurant Name -->
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Restaurant Name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/abhaya_libre_medium"/>
+
+            <!-- Rating and Distance -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <!-- Rating with Stars -->
+                <TextView
+                    android:id="@+id/ratingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.5 ★"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abhaya_libre_medium"/>
+
+                <!-- Distance -->
+                <TextView
+                    android:id="@+id/distanceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.5 km"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:fontFamily="@font/abhaya_libre_medium"/>
+            </LinearLayout>
+
+            <!-- Opening and Closing Time -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/openTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opens: 9:00 AM"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abhaya_libre_medium"/>
+
+                <TextView
+                    android:id="@+id/closeTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Closes: 10:00 PM"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/abhaya_libre_medium"/>
+            </LinearLayout>
+
+            <!-- Cost Per Person -->
+            <TextView
+                android:id="@+id/costText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Cost per person: ₹500"
+                android:textSize="14sp"
+                android:textColor="@android:color/holo_green_dark"
+                android:fontFamily="@font/abhaya_libre_medium"/>
+
+            <!-- Buttons: Direction, Menu, Call -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+
+                    <Button
+                        android:id="@+id/directionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Direction"
+                        android:drawableLeft="@drawable/baseline_directions_24"
+                        android:backgroundTint="@color/green"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+
+                   <Button
+                       android:id="@+id/menuButton"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="16dp"
+                       android:text="Menu"
+                       android:drawableLeft="@drawable/baseline_menu_24"
+                       android:backgroundTint="@color/green"
+                       android:textColor="@color/black"/>
+               </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/callButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Call"
+                        android:drawableLeft="@drawable/baseline_call_24"
+                        android:backgroundTint="@color/green"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.cardview.widget.CardView>
