@@ -104,6 +104,9 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:ems="1"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:maxLines="1"
         android:digits="0123456789"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -117,6 +120,9 @@
         android:ems="1"
         android:digits="0123456789"
         android:inputType="number"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:maxLines="1"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -128,6 +134,9 @@
         android:ems="1"
         android:digits="0123456789"
         android:inputType="number"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:maxLines="1"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber2"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -139,6 +148,9 @@
         android:ems="1"
         android:digits="0123456789"
         android:inputType="number"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:maxLines="1"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber3"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -151,6 +163,9 @@
         android:ems="1"
         android:digits="0123456789"
         android:inputType="number"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:maxLines="1"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber4"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -162,8 +177,19 @@
         android:ems="1"
         android:digits="0123456789"
         android:inputType="number"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:maxLines="1"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber5"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button"
@@ -171,17 +197,57 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#EC10C8"
         android:fontFamily="@font/lalezar"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
         android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18dp"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumber4"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.09" />
+
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="monospace"
+        android:text="Did't receive otp"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="RESEND OTP?"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:textColor="@color/pink"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView52"
+        app:layout_constraintStart_toEndOf="@+id/textView52"
+        app:layout_constraintTop_toTopOf="@+id/textView52"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
