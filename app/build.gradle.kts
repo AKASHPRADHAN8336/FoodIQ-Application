@@ -53,4 +53,7 @@ dependencies {
     implementation("com.hbb20:ccp:2.7.2")
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation("com.google.firebase:firebase-auth")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 }

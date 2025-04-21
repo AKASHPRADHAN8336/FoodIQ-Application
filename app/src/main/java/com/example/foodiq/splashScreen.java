@@ -36,10 +36,15 @@ public class splashScreen extends AppCompatActivity {
             return insets;
         });
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            startActivity(new Intent(splashScreen.this, MainActivity.class));
-            finish();
-        }, 3000);
+
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(splashScreen.this, MainActivity.class));
+            }
+        },3000);
     }
 
 }

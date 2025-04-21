@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".splashScreen"
-    android:gravity="center"
-    android:background="@drawable/topbackground">
+    android:gravity="center">
 
 
     <TextView
@@ -19,12 +18,12 @@
         android:fontFamily="@font/kurale"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/pink"
 
         />
     <ProgressBar
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp" />
 
 </LinearLayout>
