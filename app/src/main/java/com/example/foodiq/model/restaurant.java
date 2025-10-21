@@ -10,11 +10,11 @@ public class restaurant implements Serializable {
     private String restaurantName;
     private String price;
     private String openeingTime;
-<<<<<<< HEAD
-//    private String closingTime;
-=======
+
+
+
     private String closingTime;
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
+
     private Map<String,String> imageUrl;
 
 
@@ -23,20 +23,15 @@ public class restaurant implements Serializable {
 
     }
 
-<<<<<<< HEAD
-    public restaurant(String restaurantName, String id, String price, String openeingTime, Map<String, String> imageUrl) {
-=======
+
+
+
     public restaurant(String restaurantName, String id, String price, String openeingTime, String closingTime, Map<String, String> imageUrl) {
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
+
         this.restaurantName = restaurantName;
         this.id = id;
         this.price = price;
         this.openeingTime = openeingTime;
-<<<<<<< HEAD
-//        this.closingTime = closingTime;
-=======
-        this.closingTime = closingTime;
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
         this.imageUrl = imageUrl;
     }
 
@@ -73,7 +68,7 @@ public class restaurant implements Serializable {
         this.openeingTime = openeingTime;
     }
 
-<<<<<<< HEAD
+
 //    public String getClosingTime() {
 //        return closingTime;
 //    }
@@ -81,15 +76,15 @@ public class restaurant implements Serializable {
 //    public void setClosingTime(String closingTime) {
 //        this.closingTime = closingTime;
 //    }
-=======
-    public String getClosingTime() {
-        return closingTime;
-    }
 
-    public void setClosingTime(String closingTime) {
-        this.closingTime = closingTime;
-    }
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
+//    public String getClosingTime() {
+//        return closingTime;
+//    }
+
+//    public void setClosingTime(String closingTime) {
+//        this.closingTime = closingTime;
+//    }
+
 
     public Map<String, String> getImageUrl() {
         return imageUrl;

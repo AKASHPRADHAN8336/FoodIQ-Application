@@ -1,6 +1,5 @@
 package com.example.foodiq;
 
-<<<<<<< HEAD
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -18,16 +17,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-=======
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
@@ -37,84 +26,57 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodiq.adapter.RestaurantAdapter;
-<<<<<<< HEAD
 import com.example.foodiq.model.restaurant;
-=======
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-<<<<<<< HEAD
-=======
-import com.example.foodiq.model.restaurant;
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
 
-    private TextView Address;
-    private EditText search_bar;
-    private LinearLayout veg_res, non_veg_res, cusion_res, home, scan, setting, profile;
-    private RecyclerView restaurant_details;
+    private TextView txtLocation;
+    private EditText edtSearch;
+    private MaterialCardView cardVeg, cardNonVeg, cardCuisine;
+    private LinearLayout navHome, navScan, navSettings, navProfile;
+    private RecyclerView recyclerRestaurants;
     private ProgressBar progressBar;
 
     private DatabaseReference databaseReference;
     private List<restaurant> restaurantList;
     private RestaurantAdapter restaurantAdapter;
     private ConnectivityManager connectivityManager;
-=======
-import java.util.Map;
-
-public class HomeActivity extends AppCompatActivity {
-
-
-    TextView Address;
-    EditText search_bar;
-    LinearLayout veg_res , non_veg_res , cusion_res , home, scan,setting,profile;
-    RecyclerView restaurant_details;
-    private DatabaseReference databaseReference;
-    private List<restaurant> restaurantList;
-    private RestaurantAdapter restaurantAdapter;
-
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
 
+        // Initialize Firebase first
         initializeFirebase();
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
-=======
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-
-        databaseReference = firebaseDatabase.getReference("restaurant");
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-<<<<<<< HEAD
         initializeViews();
         setupRecyclerView();
         setupClickListeners();
 
+        // Initialize connectivity manager
         connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Load restaurants
         loadRestaurants();
     }
 
@@ -130,17 +92,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        Address = findViewById(R.id.txtLocation);
-        search_bar = findViewById(R.id.edtSearch);
-        veg_res = findViewById(R.id.linear_larout_1);
-        non_veg_res = findViewById(R.id.linear_layout_2);
-        cusion_res = findViewById(R.id.linear_layout_3);
-        home = findViewById(R.id.navHome);
-        setting = findViewById(R.id.navSettings);
-        scan = findViewById(R.id.navScan);
-        profile = findViewById(R.id.navProfile);
-        restaurant_details = findViewById(R.id.recyclerRestaurants);
-//        progressBar = findViewById(R.id.progress_bar);
+        txtLocation = findViewById(R.id.txtLocation);
+        edtSearch = findViewById(R.id.edtSearch);
+        cardVeg = findViewById(R.id.cardVeg);
+        cardNonVeg = findViewById(R.id.cardNonVeg);
+        cardCuisine = findViewById(R.id.cardCuisine);
+        navHome = findViewById(R.id.navHome);
+        navSettings = findViewById(R.id.navSettings);
+        navScan = findViewById(R.id.navScan);
+        navProfile = findViewById(R.id.navProfile);
+        recyclerRestaurants = findViewById(R.id.recyclerRestaurants);
+        progressBar = findViewById(R.id.progressBar);
 
         restaurantList = new ArrayList<>();
     }
@@ -148,42 +110,44 @@ public class HomeActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         restaurantAdapter = new RestaurantAdapter(this, restaurantList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        restaurant_details.setLayoutManager(layoutManager);
-        restaurant_details.setAdapter(restaurantAdapter);
-        restaurant_details.setNestedScrollingEnabled(false);
+        recyclerRestaurants.setLayoutManager(layoutManager);
+        recyclerRestaurants.setAdapter(restaurantAdapter);
+        recyclerRestaurants.setNestedScrollingEnabled(false);
     }
 
     private void setupClickListeners() {
-        home.setOnClickListener(v -> {
+        navHome.setOnClickListener(v -> {
             // Already on home page
+            showToast("Home");
         });
 
-        setting.setOnClickListener(v -> {
+        navSettings.setOnClickListener(v -> {
             showToast("Settings clicked");
         });
 
-        scan.setOnClickListener(v -> {
+        navScan.setOnClickListener(v -> {
             showToast("Scan clicked");
         });
 
-        profile.setOnClickListener(v -> {
+        navProfile.setOnClickListener(v -> {
             showToast("Profile clicked");
         });
 
-        veg_res.setOnClickListener(v -> {
+        cardVeg.setOnClickListener(v -> {
             filterRestaurantsByType("Veg");
         });
 
-        non_veg_res.setOnClickListener(v -> {
+        cardNonVeg.setOnClickListener(v -> {
             filterRestaurantsByType("Non-Veg");
         });
 
-        cusion_res.setOnClickListener(v -> {
+        cardCuisine.setOnClickListener(v -> {
             showToast("Cuisine filter clicked");
         });
     }
 
     private void loadRestaurants() {
+        // Check network connectivity before attempting to load data
         if (!isNetworkAvailable()) {
             showNetworkErrorDialog();
             return;
@@ -197,6 +161,7 @@ public class HomeActivity extends AppCompatActivity {
 
         changeInProgress(true);
 
+        // Set a timeout for the data loading operation
         Handler handler = new Handler(Looper.getMainLooper());
         Runnable timeoutRunnable = () -> {
             if (progressBar.getVisibility() == View.VISIBLE) {
@@ -206,11 +171,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
+        // Schedule timeout check after 15 seconds
         handler.postDelayed(timeoutRunnable, 15000);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Remove the timeout check
                 handler.removeCallbacks(timeoutRunnable);
                 changeInProgress(false);
 
@@ -242,66 +209,14 @@ public class HomeActivity extends AppCompatActivity {
                 if (restaurantList.isEmpty()) {
                     showToast("No restaurants available");
                 }
-=======
-
-
-        Address = findViewById(R.id.textView17);
-        search_bar = findViewById(R.id.searchBar);
-        veg_res = findViewById(R.id.linear_larout_1);
-        non_veg_res = findViewById(R.id.linear_layout_2);
-        cusion_res = findViewById(R.id.linear_layout_3);
-        home = findViewById(R.id.linear_layout_4);
-        setting = findViewById(R.id.linear_layout_5);
-        scan = findViewById(R.id.linear_layout_6);
-        profile = findViewById(R.id.linear_layout_7);
-        restaurant_details = findViewById(R.id.recycler_view);
-
-
-
-
-        restaurantList = new ArrayList<>();
-
-        setUpRecyclerView();
-
-        loadRestaurants();
-    }
-
-
-
-    private void setUpRecyclerView(){
-        restaurantAdapter = new RestaurantAdapter(this,restaurantList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        restaurant_details.setLayoutManager(layoutManager);
-        restaurant_details.setAdapter(restaurantAdapter);
-    }
-
-    private void loadRestaurants(){
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                restaurantList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    restaurant Restaurant = dataSnapshot.getValue(restaurant.class);
-                    if(Restaurant!=null){
-                        Restaurant.setId(dataSnapshot.getKey());
-                        if(Restaurant.getImageUrl()!= null){
-                            Log.d("Image debug ","Restaurant : " + Restaurant.getRestaurantName());
-                            for(Map.Entry<String,String> entry : Restaurant.getImageUrl().entrySet()){
-                                Log.d("Image debug" , entry.getKey() + ": " + entry.getValue());
-                            }
-                        }
-                        restaurantList.add(Restaurant);
-                    }
-                }
-                restaurantAdapter.notifyDataSetChanged();
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-<<<<<<< HEAD
+                // Remove the timeout check
                 handler.removeCallbacks(timeoutRunnable);
                 changeInProgress(false);
+
                 Log.e(TAG, "DatabaseError: " + error.getMessage());
                 showToast("Failed to load restaurants: " + error.getMessage());
             }
@@ -313,7 +228,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private boolean isNetworkAvailable() {
-        if (connectivityManager == null) return false;
+        if (connectivityManager == null) {
+            return false;
+        }
+
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
@@ -331,20 +249,12 @@ public class HomeActivity extends AppCompatActivity {
         if (progressBar != null) {
             progressBar.setVisibility(inProgress ? View.VISIBLE : View.GONE);
         }
-        if (restaurant_details != null) {
-            restaurant_details.setVisibility(inProgress ? View.GONE : View.VISIBLE);
+        if (recyclerRestaurants != null) {
+            recyclerRestaurants.setVisibility(inProgress ? View.GONE : View.VISIBLE);
         }
     }
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-=======
-
-                Log.e("HomeActivity" , "DatabaseError: "+error.getMessage());
-
-            }
-        });
-    }
->>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 }
