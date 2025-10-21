@@ -1,0 +1,85 @@
+package com.example.foodiq.adapter;
+
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.foodiq.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
+    private static final String TAG = "ImageAdapter";
+
+    private Context context;
+    private List<String> imageURLs;
+
+    public ImageAdapter(Context context, List<String> imageURLs) {
+        this.context = context;
+        this.imageURLs = imageURLs != null ? imageURLs : new ArrayList<>();
+    }
+
+    @NonNull
+    @Override
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_image, parent, false);
+        return new ImageViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+        if (imageURLs.isEmpty()) {
+            Log.d(TAG, "Image URLs list is empty");
+            return;
+        }
+
+        String imageUrl = imageURLs.get(position);
+
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            Log.e(TAG, "Image URL is null or empty at position: " + position);
+            // Load placeholder image
+            holder.imageView.setImageResource(R.drawable.error);
+            return;
+        }
+
+        Log.d(TAG, "Loading image: " + imageUrl);
+
+        // Optimize Cloudinary URL if it's from Cloudinary
+        String optimizedUrl = imageUrl;
+        if (imageUrl.contains("cloudinary.com") && imageUrl.contains("/upload/")) {
+            optimizedUrl = imageUrl.replace("/upload/", "/upload/w_500,h_500,c_fill/");
+            Log.d(TAG, "Optimized Cloudinary URL: " + optimizedUrl);
+        }
+
+        Glide.with(context)
+                .load(optimizedUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .thumbnail(0.1f)
+                .into(holder.imageView);
+    }
+
+    @Override
+    public int getItemCount() {
+        return imageURLs != null ? imageURLs.size() : 0;
+    }
+
+    public static class ImageViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+
+        public ImageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.imgRestaurant);
+        }
+    }
+}
