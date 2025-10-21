@@ -1,5 +1,6 @@
 package com.example.foodiq;
 
+<<<<<<< HEAD
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,6 +18,16 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+=======
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+>>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
@@ -26,15 +37,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodiq.adapter.RestaurantAdapter;
+<<<<<<< HEAD
 import com.example.foodiq.model.restaurant;
+=======
+>>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+<<<<<<< HEAD
+=======
+import com.example.foodiq.model.restaurant;
+>>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
@@ -49,10 +68,26 @@ public class HomeActivity extends AppCompatActivity {
     private List<restaurant> restaurantList;
     private RestaurantAdapter restaurantAdapter;
     private ConnectivityManager connectivityManager;
+=======
+import java.util.Map;
+
+public class HomeActivity extends AppCompatActivity {
+
+
+    TextView Address;
+    EditText search_bar;
+    LinearLayout veg_res , non_veg_res , cusion_res , home, scan,setting,profile;
+    RecyclerView restaurant_details;
+    private DatabaseReference databaseReference;
+    private List<restaurant> restaurantList;
+    private RestaurantAdapter restaurantAdapter;
+
+>>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
 
         initializeFirebase();
 
@@ -60,12 +95,21 @@ public class HomeActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
+=======
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        databaseReference = firebaseDatabase.getReference("restaurant");
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_home);
+>>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+<<<<<<< HEAD
         initializeViews();
         setupRecyclerView();
         setupClickListeners();
@@ -198,10 +242,64 @@ public class HomeActivity extends AppCompatActivity {
                 if (restaurantList.isEmpty()) {
                     showToast("No restaurants available");
                 }
+=======
+
+
+        Address = findViewById(R.id.textView17);
+        search_bar = findViewById(R.id.searchBar);
+        veg_res = findViewById(R.id.linear_larout_1);
+        non_veg_res = findViewById(R.id.linear_layout_2);
+        cusion_res = findViewById(R.id.linear_layout_3);
+        home = findViewById(R.id.linear_layout_4);
+        setting = findViewById(R.id.linear_layout_5);
+        scan = findViewById(R.id.linear_layout_6);
+        profile = findViewById(R.id.linear_layout_7);
+        restaurant_details = findViewById(R.id.recycler_view);
+
+
+
+
+        restaurantList = new ArrayList<>();
+
+        setUpRecyclerView();
+
+        loadRestaurants();
+    }
+
+
+
+    private void setUpRecyclerView(){
+        restaurantAdapter = new RestaurantAdapter(this,restaurantList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        restaurant_details.setLayoutManager(layoutManager);
+        restaurant_details.setAdapter(restaurantAdapter);
+    }
+
+    private void loadRestaurants(){
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                restaurantList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    restaurant Restaurant = dataSnapshot.getValue(restaurant.class);
+                    if(Restaurant!=null){
+                        Restaurant.setId(dataSnapshot.getKey());
+                        if(Restaurant.getImageUrl()!= null){
+                            Log.d("Image debug ","Restaurant : " + Restaurant.getRestaurantName());
+                            for(Map.Entry<String,String> entry : Restaurant.getImageUrl().entrySet()){
+                                Log.d("Image debug" , entry.getKey() + ": " + entry.getValue());
+                            }
+                        }
+                        restaurantList.add(Restaurant);
+                    }
+                }
+                restaurantAdapter.notifyDataSetChanged();
+>>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+<<<<<<< HEAD
                 handler.removeCallbacks(timeoutRunnable);
                 changeInProgress(false);
                 Log.e(TAG, "DatabaseError: " + error.getMessage());
@@ -241,4 +339,12 @@ public class HomeActivity extends AppCompatActivity {
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+=======
+
+                Log.e("HomeActivity" , "DatabaseError: "+error.getMessage());
+
+            }
+        });
+    }
+>>>>>>> f83cf2c30ead21302432d1bf36412a4be78d4e07
 }

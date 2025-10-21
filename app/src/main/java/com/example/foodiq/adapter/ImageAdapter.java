@@ -1,7 +1,9 @@
 package com.example.foodiq.adapter;
 
 import android.content.Context;
+
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.foodiq.R;
 
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
@@ -26,17 +30,33 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public ImageAdapter(Context context, List<String> imageURLs) {
         this.context = context;
         this.imageURLs = imageURLs != null ? imageURLs : new ArrayList<>();
+
+
+
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
+
+    private Context context;
+    private List<String> imageURL;
+
+    public ImageAdapter(Context context, List<String> imageURL) {
+        this.context = context;
+        this.imageURL = imageURL;
+
     }
 
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(context).inflate(R.layout.activity_image, parent, false);
+
+
         return new ImageViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+
         if (imageURLs.isEmpty()) {
             Log.d(TAG, "Image URLs list is empty");
             return;
@@ -62,6 +82,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
         Glide.with(context)
                 .load(optimizedUrl)
+
+        String imageUrls = imageURL.get(position);
+
+        String optimizedUrls = imageUrls.replace("upload/", "upload/w_500,h_500,c_fill/");
+
+        Glide.with(context)
+                .load(optimizedUrls)
+
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.error)
@@ -71,6 +99,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public int getItemCount() {
+
         return imageURLs != null ? imageURLs.size() : 0;
     }
 
@@ -83,3 +112,19 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         }
     }
 }
+
+        return imageURL != null ? imageURL.size() : 0;
+    }
+
+
+    public static class ImageViewHolder extends RecyclerView.ViewHolder{
+        ImageView imageView;
+
+
+        public ImageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.imageView30);
+        }
+    }
+}
+
