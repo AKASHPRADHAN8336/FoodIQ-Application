@@ -26,41 +26,41 @@
         </activity>
         <activity
             android:name=".imageActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".profileActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".settingActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".restaurantPhotoPage"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".restaurantsReviewPage"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".restaurantMenuPage"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".restaurants_home_page"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".userDetailActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".VerificationActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".phoneActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".foodDetailsNutritionalDetals"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".splashScreen"
             android:exported="true">

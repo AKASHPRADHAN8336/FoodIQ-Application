@@ -150,10 +150,10 @@
                     android:background="@drawable/category_veg_bg">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/vegrestaurant"
-                        app:tint="@color/white" />
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -188,10 +188,10 @@
                     android:background="@drawable/category_nonveg_bg">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/nonveg"
-                        app:tint="@color/white" />
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -226,10 +226,10 @@
                     android:background="@drawable/category_cuisine_bg">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/fusincushion"
-                        app:tint="@color/white" />
+                      />
 
                     <TextView
                         android:layout_width="wrap_content"

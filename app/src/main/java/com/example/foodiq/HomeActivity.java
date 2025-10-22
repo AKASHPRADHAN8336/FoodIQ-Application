@@ -1,11 +1,14 @@
 package com.example.foodiq;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -49,8 +52,12 @@ public class HomeActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private List<restaurant> restaurantList;
+    private List<restaurant> filteredRestaurantList;
     private RestaurantAdapter restaurantAdapter;
     private ConnectivityManager connectivityManager;
+
+    private String currentFilter = "All"; // "All", "Veg", "Non-Veg"
+    private boolean isSearching = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
         initializeViews();
         setupRecyclerView();
         setupClickListeners();
+        setupSearchFunctionality();
 
         // Initialize connectivity manager
         connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -83,8 +91,9 @@ public class HomeActivity extends AppCompatActivity {
     private void initializeFirebase() {
         try {
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance("https://foodiq-42857-default-rtdb.firebaseio.com/");
+            // CORRECTED: Changed from "restaurants" to "restaurant" to match your database structure
             databaseReference = firebaseDatabase.getReference("restaurant");
-            Log.d(TAG, "Firebase initialized successfully");
+            Log.d(TAG, "Firebase initialized successfully with restaurant node");
         } catch (Exception e) {
             Log.e(TAG, "Firebase initialization failed: " + e.getMessage());
             showToast("Failed to initialize database");
@@ -105,10 +114,11 @@ public class HomeActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         restaurantList = new ArrayList<>();
+        filteredRestaurantList = new ArrayList<>();
     }
 
     private void setupRecyclerView() {
-        restaurantAdapter = new RestaurantAdapter(this, restaurantList);
+        restaurantAdapter = new RestaurantAdapter(this, filteredRestaurantList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerRestaurants.setLayoutManager(layoutManager);
         recyclerRestaurants.setAdapter(restaurantAdapter);
@@ -122,27 +132,45 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         navSettings.setOnClickListener(v -> {
-            showToast("Settings clicked");
-        });
-
-        navScan.setOnClickListener(v -> {
-            showToast("Scan clicked");
+            Intent intent = new Intent(HomeActivity.this, settingActivity.class);
+            startActivity(intent);
         });
 
         navProfile.setOnClickListener(v -> {
-            showToast("Profile clicked");
+            Intent intent = new Intent(HomeActivity.this, profileActivity.class);
+            startActivity(intent);
         });
 
         cardVeg.setOnClickListener(v -> {
-            filterRestaurantsByType("Veg");
+            currentFilter = "Veg";
+//            filterRestaurants();
+            showToast("Showing Veg Restaurants");
         });
 
         cardNonVeg.setOnClickListener(v -> {
-            filterRestaurantsByType("Non-Veg");
+            currentFilter = "Non-Veg";
+//            filterRestaurants();
+            showToast("Showing Non-Veg Restaurants");
         });
 
         cardCuisine.setOnClickListener(v -> {
-            showToast("Cuisine filter clicked");
+            showCuisineFilterDialog();
+        });
+    }
+
+    private void setupSearchFunctionality() {
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                isSearching = s.length() > 0;
+//                filterRestaurants();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
     }
 
@@ -186,6 +214,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (!snapshot.exists()) {
                     Log.d(TAG, "No data found at restaurant node");
                     showToast("No restaurants found");
+                    updateRestaurantList();
                     return;
                 }
 
@@ -193,10 +222,11 @@ public class HomeActivity extends AppCompatActivity {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     try {
-                        restaurant Restaurant = dataSnapshot.getValue(restaurant.class);
-                        if (Restaurant != null) {
-                            Restaurant.setId(dataSnapshot.getKey());
-                            restaurantList.add(Restaurant);
+                        restaurant restaurant = dataSnapshot.getValue(restaurant.class);
+                        if (restaurant != null) {
+                            restaurant.setId(dataSnapshot.getKey());
+                            restaurantList.add(restaurant);
+                            Log.d(TAG, "Loaded restaurant: " + restaurant.getRestaurantName());
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Error parsing restaurant data: " + e.getMessage());
@@ -204,7 +234,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
                 Log.d(TAG, "Total restaurants loaded: " + restaurantList.size());
-                restaurantAdapter.notifyDataSetChanged();
+                updateRestaurantList();
 
                 if (restaurantList.isEmpty()) {
                     showToast("No restaurants available");
@@ -223,8 +253,74 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void filterRestaurantsByType(String type) {
-        showToast("Filter feature coming soon");
+    private void updateRestaurantList() {
+        filteredRestaurantList.clear();
+        filteredRestaurantList.addAll(restaurantList);
+        restaurantAdapter.notifyDataSetChanged();
+    }
+
+//    private void filterRestaurants() {
+//        String searchQuery = edtSearch.getText().toString().toLowerCase().trim();
+//
+//        filteredRestaurantList.clear();
+//
+//        for (restaurant restaurant : restaurantList) {
+//            boolean matchesSearch = searchQuery.isEmpty() ||
+//                    restaurant.getRestaurantName().toLowerCase().contains(searchQuery) ||
+//                    (restaurant.getCuisineType() != null && restaurant.getCuisineType().toLowerCase().contains(searchQuery));
+//
+//            boolean matchesFilter = currentFilter.equals("All") ||
+//                    (currentFilter.equals("Veg") && restaurant.isVeg()) ||
+//                    (currentFilter.equals("Non-Veg") && !restaurant.isVeg());
+//
+//            if (matchesSearch && matchesFilter) {
+//                filteredRestaurantList.add(restaurant);
+//            }
+//        }
+//
+//        restaurantAdapter.notifyDataSetChanged();
+//
+//        // Show message if no results found
+//        if (filteredRestaurantList.isEmpty() && (!searchQuery.isEmpty() || !currentFilter.equals("All"))) {
+//            showToast("No restaurants found matching your criteria");
+//        }
+//    }
+
+    private void showCuisineFilterDialog() {
+        String[] cuisines = {"All", "Italian", "Chinese", "Indian", "Mexican", "Japanese", "Thai", "American", "Mediterranean"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Cuisine")
+                .setItems(cuisines, (dialog, which) -> {
+                    String selectedCuisine = cuisines[which];
+                    if (selectedCuisine.equals("All")) {
+                        currentFilter = "All";
+//                        filterRestaurants();
+                        showToast("Showing All Restaurants");
+                    } else {
+                        filterByCuisine(selectedCuisine);
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void filterByCuisine(String cuisine) {
+        currentFilter = "Cuisine";
+
+        filteredRestaurantList.clear();
+        for (restaurant restaurant : restaurantList) {
+            if (restaurant.getCuisineType() != null && restaurant.getCuisineType().equalsIgnoreCase(cuisine)) {
+                filteredRestaurantList.add(restaurant);
+            }
+        }
+        restaurantAdapter.notifyDataSetChanged();
+
+        if (filteredRestaurantList.isEmpty()) {
+            showToast("No " + cuisine + " restaurants found");
+        } else {
+            showToast("Showing " + cuisine + " Restaurants");
+        }
     }
 
     private boolean isNetworkAvailable() {
@@ -256,5 +352,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Clean up any resources if needed
     }
 }

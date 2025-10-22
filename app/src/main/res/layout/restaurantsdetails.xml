@@ -1,337 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardRestaurant"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".RestaurantDetailsActivity">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    tools:context=".HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clickable="false"
+        android:focusable="false">
 
-        <!-- Header with Back Button -->
+        <!-- Image Gallery -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerImages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_light"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <!-- Restaurant Info -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="16dp"
-            android:gravity="center_vertical">
+            android:clickable="false"
+            android:focusable="false">
 
-            <ImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ccp_ic_arrow_drop_down"
-                app:tint="@color/black" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="16dp"
-                android:text="Restaurant Details"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/abhaya_libre_medium" />
-
-        </LinearLayout>
-
-        <!-- Restaurant Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
-
+            <!-- Name and Rating -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:clickable="false"
+                android:focusable="false">
 
-                <!-- Image Gallery -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerImages"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@color/gray_light" />
-
-                <!-- Restaurant Info -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/txtRestaurantName"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_weight="1"
+                    android:text="Restaurant Name"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/abhaya_libre_medium" />
 
-                    <!-- Name and Rating -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rating_background"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:gravity="center"
+                    android:clickable="false"
+                    android:focusable="false">
+
+                    <TextView
+                        android:id="@+id/txtRating"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:text="4.5"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/abhaya_libre_medium" />
 
-                        <TextView
-                            android:id="@+id/txtRestaurantName"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Restaurant Name"
-                            android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/abhaya_libre_medium" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:background="@drawable/rating_background"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="4dp"
-                            android:gravity="center">
-
-                            <TextView
-                                android:id="@+id/txtRating"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="4.5"
-                                android:textColor="@color/white"
-                                android:textSize="12sp"
-                                android:textStyle="bold"
-                                android:fontFamily="@font/abhaya_libre_medium" />
-
-                            <ImageView
-                                android:layout_width="12dp"
-                                android:layout_height="12dp"
-                                android:layout_marginStart="2dp"
-                                android:src="@drawable/ic_star"
-                                app:tint="@color/white" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <!-- Cuisine Type and Distance -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="4px">
-
-                        <TextView
-                            android:id="@+id/txtCuisineType"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="North Indian • Chinese"
-                            android:textColor="@color/gray_dark"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/abhaya_libre_medium" />
-
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="4dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="@drawable/dot_separator" />
-
-                        <TextView
-                            android:id="@+id/txtDistance"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2.5 km"
-                            android:textColor="@color/gray_dark"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/abhaya_libre_medium" />
-
-                    </LinearLayout>
-
-                    <!-- Timing and Cost -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="8dp">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
-
-                            <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:src="@drawable/ic_time"
-                                app:tint="@color/gray_dark" />
-
-                            <TextView
-                                android:id="@+id/txtTiming"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:text="10 AM - 11 PM"
-                                android:textColor="@color/gray_dark"
-                                android:textSize="13sp"
-                                android:fontFamily="@font/abhaya_libre_medium" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
-
-                            <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:src="@drawable/ic_rupee"
-                                app:tint="@color/gray_dark" />
-
-                            <TextView
-                                android:id="@+id/txtCost"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:text="₹500 for two"
-                                android:textColor="@color/gray_dark"
-                                android:textSize="13sp"
-                                android:fontFamily="@font/abhaya_libre_medium" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <!-- Address -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="12dp"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/baseline_location_pin_24"
-                            app:tint="@color/gray_dark" />
-
-                        <TextView
-                            android:id="@+id/txtAddress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="Old Madivala, 3rd main road, Bangalore"
-                            android:textColor="@color/gray_dark"
-                            android:textSize="13sp"
-                            android:fontFamily="@font/abhaya_libre_medium" />
-
-                    </LinearLayout>
-
-                    <!-- Action Buttons -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="16dp"
-                        android:gravity="center">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnDirection"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="8dp"
-                            android:text="Direction"
-                            android:textSize="12sp"
-                            app:icon="@drawable/ic_directions"
-                            app:iconGravity="start"
-                            app:cornerRadius="20dp"
-                            app:strokeColor="@color/green_primary"
-                            app:strokeWidth="1dp"
-                            app:iconPadding="4dp"
-                            style="@style/Widget.Material3.Button.OutlinedButton" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnMenu"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:text="Menu"
-                            android:textSize="12sp"
-                            app:icon="@drawable/baseline_menu_24"
-                            app:iconGravity="start"
-                            app:cornerRadius="20dp"
-                            app:strokeColor="@color/green_primary"
-                            app:strokeWidth="1dp"
-                            app:iconPadding="4dp"
-                            style="@style/Widget.Material3.Button.OutlinedButton" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCall"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="8dp"
-                            android:text="Call"
-                            android:textSize="12sp"
-                            app:icon="@drawable/phone"
-                            app:iconGravity="start"
-                            app:cornerRadius="20dp"
-                            app:strokeColor="@color/green_primary"
-                            app:strokeWidth="1dp"
-                            app:iconPadding="4dp"
-                            style="@style/Widget.Material3.Button.OutlinedButton" />
-
-                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="2dp"
+                        android:src="@drawable/ic_star"
+                        android:clickable="false"
+                        android:focusable="false"
+                        app:tint="@color/white" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Menu Section -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="24dp">
-
-            <TextView
+            <!-- Cuisine Type and Distance -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:text="Popular Items"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/abhaya_libre_medium" />
+                android:orientation="horizontal"
+                android:layout_marginTop="4px"
+                android:clickable="false"
+                android:focusable="false">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerMenu"
+                <TextView
+                    android:id="@+id/txtCuisineType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="North Indian • Chinese"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="14sp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/abhaya_libre_medium" />
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/dot_separator"
+                    android:clickable="false"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/txtDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.5 km"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="14sp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/abhaya_libre_medium" />
+
+            </LinearLayout>
+
+            <!-- Timing and Cost -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:clickable="false"
+                android:focusable="false">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:clickable="false"
+                    android:focusable="false">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_time"
+                        android:clickable="false"
+                        android:focusable="false"
+                        app:tint="@color/gray_dark" />
+
+                    <TextView
+                        android:id="@+id/txtTiming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="10 AM - 11 PM"
+                        android:textColor="@color/gray_dark"
+                        android:textSize="13sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/abhaya_libre_medium" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:clickable="false"
+                    android:focusable="false">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/outline_currency_rupee_24"
+                        android:clickable="false"
+                        android:focusable="false"
+                        app:tint="@color/gray_dark" />
+
+                    <TextView
+                        android:id="@+id/txtCost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="₹500 for two"
+                        android:textColor="@color/gray_dark"
+                        android:textSize="13sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/abhaya_libre_medium" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Address -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:clickable="false"
+                android:focusable="false">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/baseline_location_pin_24"
+                    android:clickable="false"
+                    android:focusable="false"
+                    app:tint="@color/gray_dark" />
+
+                <TextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Old Madivala, 3rd main road, Bangalore"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="13sp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/abhaya_libre_medium" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</ScrollView>
+</com.google.android.material.card.MaterialCardView>
